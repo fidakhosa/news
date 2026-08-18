@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="PulseWire — Real-time news, breaking stories, world events."/>
+<title>PulseWire — Live News Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Read Progress -->
+<div id="readProgress"></div>
+
+<!-- ═══════ BREAKING TICKER ════ ═══ -->
+<div class="ticker-bar" id="ticker">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <div class="logo" id="logoBtn">Pulse<em>Wire</em></div>
+    <div class="nav-actions">
+      <button class="icon-btn hamburger" id="hamburger">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════ STICKY CATEGORY BAR ═══════ -->
+<div class="cat-bar-wrap" id="catBarWrap">
+  <div class="container">
+    <div class="nav-pills" id="navPills"></div>
+  </div>
+</div>
+
+<!-- Mobile Drawer -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div class="logo">Pulse<em>Wire</em></div>
+    <button class="icon-btn" id="drawerClose">✕</button>
+  </div>
+  <div class="drawer-actions">
+    <button class="icon-btn" id="themeBtn" title="Toggle theme">🌙</button>
+    <button class="icon-btn" id="notifBtn" title="Notifications">
+      🔔<span class="notif-badge"></span>
+    </button>
+    <button class="icon-btn" id="bookmarkNavBtn" title="My Bookmarks">🔖</button>
+    <!-- User menu (shown after login) -->
+    <div style="position:relative" id="userMenuWrap" class="hidden">
+      <button class="user-avatar-btn" id="userAvatarBtn"></button>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="ud-head">
+          <div class="ud-name" id="udName"></div>
+          <div class="ud-email" id="udEmail"></div>
+        </div>
+        <div class="ud-item" id="udProfile">👤 My Profile</div>
+        <div class="ud-item" id="udBookmarks">🔖 Saved Articles</div>
+        <div class="ud-item" id="udAdmin">⚙️ Admin Dashboard</div>
+        <div class="ud-sep"></div>
+        <div class="ud-item danger" id="udLogout">🚪 Sign Out</div>
+      </div>
+    </div>
+  </div>
+  <button class="sign-in-btn drawer-signin" id="signInBtn">👤 Sign In</button>
+  <div class="drawer-cats" id="drawerCats"></div>
+</div>
+
+<!-- ═══════ SEARCH ═══════ -->
+<div class="search-bar">
+  <div class="container">
+    <div class="search-wrap" id="searchWrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text"
+        placeholder="Search news, topics, authors…" autocomplete="off"/>
+      <button class="search-clear" id="searchClear">✕</button>
+      <div class="suggestions hidden" id="suggestions"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ MAIN ═══════ -->
+<main id="main"></main>
+
+<!-- ═══════ NEWSLETTER ═══════ -->
+<div class="newsletter" id="newsletterSection">
+  <div class="nl-inner">
+    <div class="nl-icon">✉️</div>
+    <h2 class="nl-title">Stay Ahead of Every Story</h2>
+    <p class="nl-sub">Morning briefing, breaking alerts, weekly deep-dives. No spam — ever.</p>
+    <div class="nl-form">
+      <input class="nl-input" id="nlInput" type="email" placeholder="your@email.com"/>
+      <button class="nl-btn" id="nlBtn">Subscribe Free</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Pulse<em>Wire</em></div>
+        <p>The world's most trusted digital newsroom — real-time reporting, expert analysis, and fearless journalism from every corner of the globe.</p>
+        <div class="footer-social">
+          <div class="soc-icon" title="Twitter">𝕏</div>
+          <div class="soc-icon" title="Facebook">f</div>
+          <div class="soc-icon" title="Instagram">📸</div>
+          <div class="soc-icon" title="YouTube">▶</div>
+          <div class="soc-icon" title="LinkedIn">in</div>
+        </div>
+      </div>
+      <div class="f-col"><h4>Sections</h4><ul id="fSections"></ul></div>
+      <div class="f-col"><h4>Company</h4><ul>
+        <li>About Us</li><li>Our Team</li><li>Careers</li>
+        <li>Advertise</li><li>Press Room</li><li>Contact Us</li>
+      </ul></div>
+      <div class="f-col"><h4>Legal</h4><ul>
+        <li>Privacy Policy</li><li>Terms of Service</li>
+        <li>Cookie Policy</li><li>GDPR</li>
+        <li>Editorial Standards</li><li>Corrections</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PulseWire Media Group. All rights reserved.</span>
+      <div class="f-links">
+        <span>Privacy</span><span>Terms</span><span>Sitemap</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ AUTH MODAL ═════ ═ -->
+<div class="overlay" id="authOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="m-logo">Pulse<em style="font-style:italic">Wire</em></div>
+    <div class="m-title" id="mTitle">Welcome back</div>
+    <div class="m-sub" id="mSub">Sign in to bookmark, comment & personalise</div>
+    <div id="mSocials" class="social-row">
+      <button class="soc-btn" id="gBtn">🔵 Google</button>
+      <button class="soc-btn" id="aBtn">🍎 Apple</button>
+    </div>
+    <div class="divider-or" id="mDivider">or continue with email</div>
+    <div class="m-form">
+      <div id="nameField" class="hidden">
+        <label class="f-label">Full Name</label>
+        <input class="f-input" id="nameInput" placeholder="Arjun Mehta"/>
+      </div>
+      <div>
+        <label class="f-label">Email Address</label>
+        <input class="f-input" id="emailInput" type="email" placeholder="you@example.com"/>
+      </div>
+      <div id="passField">
+        <label class="f-label">Password</label>
+        <input class="f-input" id="passInput" type="password" placeholder="••••••••"/>
+      </div>
+      <a class="forgot-link hidden" id="forgotLink">Forgot password?</a>
+      <button class="m-submit" id="mSubmit">Sign In</button>
+    </div>
+    <div class="m-switch" id="mSwitch">
+      Don't have an account? <a id="mSwitchLink">Sign up</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ SHARE MODAL ═══════ -->
+<div class="share-modal-overlay" id="shareOverlay">
+  <div class="share-modal">
+    <button class="modal-close" id="shareClose">✕</button>
+    <div style="font-weight:800;font-size:1rem">Share this article</div>
+    <div class="share-grid">
+      <div class="share-item" onclick="shareToSocial('twitter')"><span>𝕏</span>Twitter</div>
+      <div class="share-item" onclick="shareToSocial('facebook')"><span>👥</span>Facebook</div>
+      <div class="share-item" onclick="shareToSocial('whatsapp')"><span>💬</span>WhatsApp</div>
+      <div class="share-item" onclick="shareToSocial('linkedin')"><span>💼</span>LinkedIn</div>
+    </div>
+    <div class="share-copy">
+      <input class="share-link-input" id="shareLinkInput" readonly/>
+      <button class="share-copy-btn" id="shareCopyBtn">Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ ADMIN FORM MODAL ═══════ -->
+<div class="form-modal-overlay" id="adminFormOverlay">
+  <div class="form-modal">
+    <button class="fm-close" id="adminFormClose">✕</button>
+    <div class="fm-title" id="adminFormTitle">Add New Article</div>
+    <div class="fm-form" id="adminFormContent"></div>
+  </div>
+</div>
+
+<!-- Toast & Back to Top -->
+<div class="toast" id="toast"><div class="t-dot"></div><span id="toastMsg"></span></div>
+<button class="btt" id="bttBtn" title="Back to top">↑</button>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════ -->
+<script src="script.js"></script>
+</body>
+</html>
